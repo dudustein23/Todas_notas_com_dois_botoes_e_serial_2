@@ -25,6 +25,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <ctype.h>
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -240,6 +241,7 @@ ESTADO_BOTAO estado_botao(uint8_t atual, uint8_t * anterior) {
 	}
 	*anterior = atual;
 	return SOLTO;
+
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
