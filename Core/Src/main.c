@@ -210,6 +210,7 @@ BUTTON_CONTROLLER start_controller(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, BUTTO
 }
 
 void gerenciador_botao(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, BUTTON_PUPD pull, uint8_t * atual, uint8_t * anterior, ESTADO_BOTAO * estado)
+{
 	ESTADO_BOTAO estado_botao(uint8_t atual, uint8_t * anerior);
 	if ((*atual == 0) && (HAL_GPIO_ReadPin(GPIOx, GPIO_Pin) != (GPIO_PinState) pull)){
 		for (int i = 0; i < 80000; i++);
