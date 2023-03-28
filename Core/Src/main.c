@@ -209,7 +209,7 @@ BUTTON_CONTROLLER start_controller(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, BUTTO
 	return controller;
 }
 
-void gerenciador_botao(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, BUTTON_PUPD pull, uint8_t * atual, uint8_t * anterior, ESTADO_BOTAO * estado) {
+void gerenciador_botao(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, BUTTON_PUPD pull, uint8_t * atual, uint8_t * anterior, ESTADO_BOTAO * estado)
 	ESTADO_BOTAO estado_botao(uint8_t atual, uint8_t * anerior);
 	if ((*atual == 0) && (HAL_GPIO_ReadPin(GPIOx, GPIO_Pin) != (GPIO_PinState) pull)){
 		for (int i = 0; i < 80000; i++);
@@ -223,12 +223,14 @@ void gerenciador_botao(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, BUTTON_PUPD pull,
 	*estado = estado_botao(*atual, anterior);
 }
 
-void gerenciador_botao_struct(BUTTON_CONTROLLER * controller) {
+void gerenciador_botao_struct(BUTTON_CONTROLLER * controller)
+{
 	void gerenciador_botao(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, BUTTON_PUPD pull, uint8_t * atual, uint8_t * anterior, ESTADO_BOTAO * estado);
 	gerenciador_botao(controller->GPIOx, controller->GPIO_Pin, controller->pull, &(controller->atual), &(controller->anterior), &(controller->estado));
 }
 
-ESTADO_BOTAO estado_botao(uint8_t atual, uint8_t * anterior) {
+ESTADO_BOTAO estado_botao(uint8_t atual, uint8_t * anterior)
+{
 	if ((*anterior == 0) && (atual == 1)) {
 		*anterior = atual;
 		return AO_PRESSIONAR;
@@ -294,7 +296,8 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 	HAL_UART_Receive_IT(&huart2, &comando, TCMD);
 }
 
-void gerencia_estados() {
+void gerencia_estados()
+{
 	void setaFrequenciaTim(TIM_HandleTypeDef * htim, int frequencia);
 
 	switch(comando_numero){
@@ -323,15 +326,18 @@ void setaFrequenciaTim(TIM_HandleTypeDef * htim, int frequencia)
 	__HAL_TIM_SET_AUTORELOAD(htim, arr);
 }
 
-long int pegaFrequenciaTim(TIM_HandleTypeDef * htim) {
+long int pegaFrequenciaTim(TIM_HandleTypeDef * htim)
+{
 	return (long int) 84000000/((htim->Instance->PSC + 1) * (htim->Instance->ARR + 1)) / 2;
 }
 
-void inverte_pinos(){
+void inverte_pinos()
+{
 	HAL_GPIO_TogglePin(Audio_GPIO_Port, Audio_Pin);
 }
 
-void zera_notas(){
+void zera_notas()
+{
 	HAL_GPIO_WritePin(Audio_GPIO_Port, Audio_Pin, 0);
 }
 
